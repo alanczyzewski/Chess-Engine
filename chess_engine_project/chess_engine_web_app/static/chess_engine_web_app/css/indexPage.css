@@ -1,0 +1,18 @@
+.pieces-picker-box {
+    width: 120px !important;
+    height: 120px !important;
+    border-color: #7ba33b;
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 50%;
+    background-color: #7ba33b !important;
+    cursor: pointer;
+}
+
+.pieces-picker-box:hover {
+    filter: brightness(80%);
+}
+
+.selected-color {
+    filter: brightness(60%) !important;
+}

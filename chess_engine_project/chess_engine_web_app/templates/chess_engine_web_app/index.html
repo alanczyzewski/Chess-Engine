@@ -1,0 +1,72 @@
+{% extends 'chess_engine_web_app/base.html' %}
+{% load static %}
+
+{% block headExt %}
+
+<link rel="stylesheet" href={% static 'chess_engine_web_app/css/indexPage.css' %}>
+
+{% endblock headExt %}
+
+{% block content %}
+
+<div class="container pt-5">
+    <div class='row justify-content-center text-center my-5'>
+        <table class="mx-3">
+            <tr>
+                <td>
+                    <div class='mx-2'>
+                        Kolor bierek:
+                    </div>
+                </td>
+                <td id='white' class='pieces-picker-box pieces-picker-white selected-color'>
+                    <div class='mx-2'>
+                        <img class="img-fluid" src={% static 'chess_engine_web_app/chessboardjs-1.0.0/img/chesspieces/wikipedia/wK.png' %}>
+                    </div>
+                </td>
+                <td style='width: 10px;'>
+                <td id='black' class='pieces-picker-box pieces-picker-black'>
+                    <div class='mx-2'>
+                        <img class="img-fluid" src={% static 'chess_engine_web_app/chessboardjs-1.0.0/img/chesspieces/wikipedia/bK.png' %}>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class='row justify-content-center text-center mb-5'>
+        <table class="mx-3">
+            <tr>
+                <td>
+                    <div class='mx-2'>
+                        Kontrola czasu:
+                    </div>
+                </td>
+                <td>
+                    <div class="mx-3">
+                        <select id='select-time' class="select-start-game form-select form-control-lg">
+                            <option value='null' selected>Brak</option>
+                            <option value='5|5'>5 | 5 minut</option>
+                            <option value='10'>10 minut</option>
+                            <option value='30'>30 minut</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class='row justify-content-center text-center mb-5'>
+        <div class="mx-3">
+            <a href= {% url 'chess_engine_web_app:game' %} class="btn btn-success btn-lg btn-play px-5">Zagraj!</a>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+<script src={% static 'chess_engine_web_app/js/indexPage.js' %}></script>
+
+{% endblock scripts %}

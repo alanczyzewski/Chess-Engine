@@ -1,0 +1,81 @@
+{% extends 'chess_engine_web_app/base.html' %}
+{% load static %}
+
+{% block headExt %}
+
+<link rel="stylesheet" href={% static 'chess_engine_web_app/css/gamePage.css' %}>
+<link rel="stylesheet" href={% static 'chess_engine_web_app/chessboardjs-1.0.0/css/chessboard-1.0.0.min.css' %}>
+
+{% endblock headExt %}
+
+{% block content %}
+
+<div class="container-fluid pt-5">
+
+    <div class='row mt-5'>
+
+        <div class='col-12 col-lg-9 mb-5'>
+
+            <div class="mx-auto" style="width: 700px">
+                <div class="row px-5 py-0">
+                    <div class='col-3'>
+                        <span class="material-icons icon-player">computer</span>
+                    </div>
+                    <div class='col-6'>
+                    </div>
+                    <div class='col-3 mb-2'>
+                        <button id='clock-bot' type="button" class="clock-component btn btn-info" disabled>
+                            <span class="material-icons icon-clock">timer</span>
+                            <span id='clock-bot-value' class="clock-value pl-2" style="font-size: 24px;"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="board"></div>
+
+                <div class="row px-5 pb-0 mt-2">
+                    <div class='col-3'>
+                        <span class="material-icons icon-player">person</span>
+                    </div>
+                    <div class='col-6'>
+                    </div>
+                    <div class='col-3'>
+                        <button id='clock-user' type="button" class="clock-component btn btn-info" disabled>
+                            <span class="material-icons icon-clock">timer</span>
+                            <span id='clock-user-value' class="clock-value pl-2" style="font-size: 24px;"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class='col-12 col-lg-3 mt-5'>
+            <div class='game-description mx-4 p-4 mb-4'>
+                <div class="text-center mb-3">Zapis partii</div>
+                <div id='gamePgn' class="overflow-auto mb-3"></div>
+                <div class="text-center">
+                    <input id="btnCopy" type="button" class="btn btn-secondary" value="Kopiuj">
+                </div>
+            </div>
+
+            <div class="text-center mb-3">
+                <a href= {% url 'chess_engine_web_app:home' %} class="btn btn-danger btn-lg">Rozpocznij grę od nowa</a>
+                {% comment %} <input type="button" class="btn btn-danger btn-lg" value="Rozpocznij grę od nowa"> {% endcomment %}
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+<script src={% static 'chess_engine_web_app/chessboardjs-1.0.0/js/chessboard-1.0.0.js' %}></script>
+<script src={% static 'chess_engine_web_app/chessjs/chess.js' %}></script>
+
+<script src={% static 'chess_engine_web_app/js/gamePage.js' %}></script>
+
+{% endblock scripts %}
