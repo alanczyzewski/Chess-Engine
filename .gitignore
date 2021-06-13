@@ -4,3 +4,6 @@
 # Ignore .vscode
 *.vscode
 
+# data to train model (too large file)
+data.pickle
+

@@ -1,56 +1,38 @@
 from django.db import models
 
+from .TP import model_prediction, model_training
+
 class Game(models.Model):
     player_color = models.CharField(max_length=5)
-    time = models.CharField(max_length=5)
+    fen = models.CharField(max_length=100, default='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+    # chessboard = models.CharField(max_length=100)
+    # time = models.CharField(max_length=5)
     # moves = models.CharField(max_length=100)
-    move_number = models.IntegerField(default=0)
+    # move_number = models.IntegerField(default=0)
 
     def get_move(self, user_move):
-        self.move_number += 1
+        # self.move_number += 1
+        # self.save()
+
+        model = model_training.get_model()
+        model.load_weights('chess_engine_web_app/TP/model.weights')
+
+        if self.player_color == 'white':
+            is_white = False
+        else:
+            is_white = True
+
+        runner = model_prediction.game_runner(model, 'shallow_best', is_white, not is_white)
+        move, fen = runner.server_response(self.fen, user_move, self.player_color)
+
+        self.fen = fen
         self.save()
 
-        # white win
-        
-        if self.player_color == 'white':
-            if self.move_number == 1:
-                return 'e7e5'
-            elif self.move_number == 2:
-                return 'd7d6'
-            elif self.move_number == 3:
-                return 'c7c5'
-            elif self.move_number == 4:
-                return 'a7a5'
-            elif self.move_number == 5:
-                return 'b7b5'
-            elif self.move_number == 6:
-                return 'h7h5'
-            
-        else:
-            if self.move_number == 1:
-                return 'e2e4'
-            elif self.move_number == 2:
-                return 'f1c4'
-            elif self.move_number == 3:
-                return 'd1f3'
-            elif self.move_number == 4:
-                return 'f3f7'
-        
-        # # black win
-
-        # if self.player_color == 'white':
-        #     if self.move_number == 1:
-        #         return 'e7e5'
-        #     elif self.move_number == 2:
-        #         return 'd8h4'
-        # else:
-        #     if self.move_number == 1:
-        #         return 'f2f3'
-        #     elif self.move_number == 2:
-        #         return 'g2g4'
+        return move
 
     def reset_state(self):
-        self.move_number = 0
+        # self.move_number = 0
+        self.fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
         self.save()
 
     def __str__(self):
