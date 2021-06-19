@@ -1,5 +1,7 @@
 # Chess Engine (Django)
 
+Chess engine using machine learning methods. The algorithm is used in a web application that allows the user to play the game with the engine.
+
 #### Run
 
 To run this project go to chess_engine_project/ directory and run the following command:
