@@ -1,0 +1,8 @@
+tensorflow==2.4.1
+chess==1.6.1
+numpy==1.20.3
+matplotlib==3.3.2
+Django==3.2
+dataclasses==0.8
+pygame==2.0.1
+scikit_learn==0.24.2
